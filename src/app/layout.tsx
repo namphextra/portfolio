@@ -12,8 +12,9 @@ const pacificoFont = Pacifico({
   display: "swap",
 });
 const font = Poppins({
-  weight: "300",
+  weight: "400",
   subsets: ["latin"],
+  display: "swap",
 });
 
 const theme = createTheme({

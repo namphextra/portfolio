@@ -1,11 +1,10 @@
 import React from "react";
-import "react-quill/dist/quill.bubble.css";
-import dynamic from "next/dynamic";
-import "@/styles/editor.scss";
+// import dynamic from "next/dynamic";
+import { Editor } from "@tinymce/tinymce-react";
 
-const ReactQuill = dynamic(() => import("react-quill"), { ssr: false });
+// const ReactQuill = dynamic(() => import("react-quill"), { ssr: false });
 
-export default function Editor({
+export default function EditorBase({
   id,
   data,
   updateContent,
@@ -15,38 +14,24 @@ export default function Editor({
   updateContent: (data: string) => void;
 }) {
   return (
-    <ReactQuill
+    <Editor
       id={id}
-      className="border border-gray-300 rounded-md"
-      theme="bubble"
-      value={data}
-      onChange={updateContent}
-      formats={[
-        "header",
-        "bold",
-        "italic",
-        "underline",
-        "strike",
-        "blockquote",
-        "list",
-        "bullet",
-        "indent",
-        "link",
-        "image",
-      ]}
-      modules={{
-        toolbar: [
-          [{ header: [1, 2, 3, 4, false] }],
-          ["bold", "italic", "underline", "strike", "blockquote"],
-          [
-            { list: "ordered" },
-            { list: "bullet" },
-            { indent: "-1" },
-            { indent: "+1" },
-          ],
-          ["link", "image"],
-          ["clean"],
+      onEditorChange={updateContent}
+      initialValue={data}
+      apiKey="rybzwcqaiqblzmmyn3smxmwvfjggujcovrhcz9tn6kboh2xu"
+      init={{
+        height: 500,
+        menubar: false,
+        plugins: [
+          "advlist autolink lists link image charmap print preview anchor",
+          "searchreplace visualblocks code fullscreen",
+          "insertdatetime media table paste code help wordcount",
         ],
+        toolbar:
+          "undo redo | formatselect | " +
+          "bold italic backcolor | alignleft aligncenter " +
+          "alignright alignjustify | bullist numlist outdent indent | " +
+          "removeformat | help",
       }}
     />
   );
